@@ -3,7 +3,7 @@
 #include <time.h>
 #include "L_sondas.h"
 
-// Função de comparação para ordenar as rochas pelo maior valor/peso
+
 int compararRochas(const void* a, const void* b) {
     Rocha* r1 = (Rocha*)a;
     Rocha* r2 = (Rocha*)b;
@@ -11,26 +11,29 @@ int compararRochas(const void* a, const void* b) {
     long double razao1 = (long double)r1->valor / r1->peso;
     long double razao2 = (long double)r2->valor / r2->peso;
 
-    if (razao1 < razao2) return 1;  // Ordem decrescente
-    if (razao1 > razao2) return -1;
+    if (razao1 < razao2){
+        return 1;  
+    }
+    if (razao1 > razao2) {
+        return -1;
+    }
     return 0;
 }
 
-// Algoritmo Guloso para a mochila
+
 int mochilaGulosa(int capacidade, Rocha rochas[], int N, int itens_selecionados[], int* peso_total) {
     int pesoAtual = 0, valorTotal = 0;
 
-    // Selecionar itens seguindo a abordagem gulosa
     for (int i = 0; i < N; i++) {
         if (!rochas[i].usado && pesoAtual + rochas[i].peso <= capacidade) {
             pesoAtual += rochas[i].peso;
             valorTotal += rochas[i].valor;
-            itens_selecionados[rochas[i].posicao] = 1; // Selecionar o item
-            rochas[i].usado = 1; // Marcar como usado
+            itens_selecionados[rochas[i].posicao] = 1; 
+            rochas[i].usado = 1; 
         }
     }
 
-    *peso_total = pesoAtual; // Atualizar o peso total acumulado
+    *peso_total = pesoAtual; 
     return valorTotal;
 }
 
@@ -43,7 +46,7 @@ int main(int argc, char const* argv[]) {
     int N;
 
     FILE* arquivo = fopen("arquivo.txt", "r");
-    if (!arquivo) {
+    if (arquivo==NULL) {
         printf("Erro ao abrir o arquivo.\n");
         return 1;
     }
@@ -56,24 +59,23 @@ int main(int argc, char const* argv[]) {
         rochas[i].peso = peso_rocha;
         rochas[i].valor = valor_rocha;
         rochas[i].usado = 0;
-        rochas[i].posicao = i; // Identificador único para rastrear a rocha
+        rochas[i].posicao = i; 
     }
 
-    // Ordenar as rochas pelo maior valor/peso
+   
     qsort(rochas, N, sizeof(Rocha), compararRochas);
 
-    // Resolver para cada sonda
+    
     for (int sonda = 1; sonda <= qnt_sondas; sonda++) {
         int itens_selecionados[N];
         for (int i = 0; i < N; i++) {
-            itens_selecionados[i] = 0; // Inicializar seleção
+            itens_selecionados[i] = 0; 
         }
 
         int peso_total = 0;
         int valorTotal = mochilaGulosa(sonda_capacidade, rochas, N, itens_selecionados, &peso_total);
 
-        // Exibir resultados para a sonda
-        printf("Sonda %d: Peso %d, Valor %d, Solução [", sonda, peso_total, valorTotal);
+        printf("Sonda %d: Peso %d, Valor %d, Solucao [", sonda, peso_total, valorTotal);
         for (int i = 0; i < N; i++) {
             if (itens_selecionados[i]) {
                 printf("%d ", i);
@@ -81,11 +83,8 @@ int main(int argc, char const* argv[]) {
         }
         printf("]\n");
     }
-    for (int i = 0; i < 20; i++)
-    {
-       
-            printf("\n %d - %d : %d %d \n", rochas[i].posicao, rochas[i].usado, rochas[i].peso, rochas[i].valor);
-    
+    for (int i = 0; i <N; i++){
+       printf("\n %d - %d : %d - %d \n", rochas[i].posicao, rochas[i].usado, rochas[i].peso, rochas[i].valor);
     }
     
     fclose(arquivo);
