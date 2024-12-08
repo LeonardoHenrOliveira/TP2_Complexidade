@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "l_sondas.h": "c",
+        "sonda.h": "c",
+        "compartimento.h": "c"
+    }
+}
