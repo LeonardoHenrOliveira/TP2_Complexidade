@@ -5,14 +5,14 @@
 #define Maxtam 100
 
 typedef struct{
-    Tsonda item[Maxtam];
+    Sonda item[Maxtam];
     int primeiro;
     int ultimo;
 }L_sondas;
 
 void FLvazia_s(L_sondas* lista_s);
 int LEhVazia_s(L_sondas* lista_s);
-int LInsere_s(L_sondas* lista_s, Tsonda x);
-int Lretira_s(L_sondas* lista_s, int p, Tsonda *px);
+int LInsere_s(L_sondas* lista_s, Sonda x);
+int Lretira_s(L_sondas* lista_s, int p, Sonda *px);
 
 #endif

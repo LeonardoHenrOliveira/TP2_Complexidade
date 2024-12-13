@@ -10,13 +10,13 @@ int LEhVazia_s(L_sondas* lista_s){
     return(lista_s->primeiro == lista_s->ultimo);
 };
 
-int LInsere_s(L_sondas* lista_s, Tsonda x){
+int LInsere_s(L_sondas* lista_s, Sonda x){
     if(lista_s->ultimo == Maxtam)
         return 0;
     lista_s->item[lista_s->ultimo++] = x;
     return 1;
 };
-int Lretira_s(L_sondas* lista_s, int p, Tsonda *px){
+int Lretira_s(L_sondas* lista_s, int p, Sonda *px){
     int cont;
     if(LEhVazia_s(lista_s) || p >= lista_s->ultimo || p < 0)
         return 0;

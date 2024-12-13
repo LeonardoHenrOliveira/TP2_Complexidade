@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 
-void Inicializar_Sonda(Tsonda* sonda, int capacidade){
+void Inicializar_Sonda(Sonda* sonda, int capacidade){
     sonda->capacidade = capacidade;
     FLvazia(&sonda->compartimento);
 }

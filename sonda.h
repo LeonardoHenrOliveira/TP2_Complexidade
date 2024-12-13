@@ -7,8 +7,8 @@
 typedef struct{
     Tlista compartimento;
     int capacidade;
-}Tsonda;
+}Sonda;
 
-void Inicializar_Sonda(Tsonda* sonda, int capacidade);
+void Inicializar_Sonda(Sonda* sonda, int capacidade);
 
 #endif
